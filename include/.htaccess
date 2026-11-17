@@ -1,0 +1,19 @@
+# Los archivos de esta carpeta se usan desde las páginas del sitio.
+# Solo el procesador del formulario puede abrirse directamente.
+<IfModule mod_authz_core.c>
+	Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+	Order allow,deny
+	Deny from all
+</IfModule>
+
+<Files "contacto-envio.php">
+	<IfModule mod_authz_core.c>
+		Require all granted
+	</IfModule>
+	<IfModule !mod_authz_core.c>
+		Order allow,deny
+		Allow from all
+	</IfModule>
+</Files>

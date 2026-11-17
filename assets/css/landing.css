@@ -1,0 +1,1488 @@
+
+:root {
+	/* Identidad VeterChile: morado como color principal y turquesa (#31BEBE)
+	   solo como acento puntual (checks, flechas, destellos y resaltes). */
+	--lp-plum: #321B5E;
+	--lp-plum-700: #3E2274;
+	--lp-purple: #6F42C1;
+	--lp-purple-600: #5A32A3;
+	--lp-purple-700: #4A2988;
+	--lp-purple-300: #B9A0E6;
+	--lp-purple-100: #EFEAF9;
+	--lp-teal: #31BEBE;
+	--lp-teal-600: #147A7A;
+	--lp-teal-300: #8FE5E5;
+	--lp-teal-100: #E3F6F6;
+
+	--lp-ink: #1F1730;
+	--lp-ink-soft: #5A5470;
+	--lp-ink-faint: #6F6986;
+	--lp-surface: #FFFFFF;
+	--lp-bg: #F7F8FA;
+	--lp-line: #E5E0F0;
+
+	--lp-r-sm: 12px;
+	--lp-r-md: 18px;
+	--lp-r-lg: 26px;
+	--lp-shadow-sm: 0 2px 8px rgba(42, 20, 67, .05);
+	--lp-shadow-md: 0 14px 40px -18px rgba(42, 20, 67, .28);
+	--lp-shadow-lg: 0 34px 70px -30px rgba(42, 20, 67, .38);
+
+	--lp-font-title: 'Manrope', 'Inter', sans-serif;
+	--lp-font-body: 'Inter', sans-serif;
+}
+
+/* ---- Base de la página -------------------------------------------------- */
+body.lp {
+	background: var(--lp-bg) !important;
+	color: var(--lp-ink);
+	font-family: var(--lp-font-body);
+	overflow-x: hidden;
+}
+
+.lp * { box-sizing: border-box; }
+
+.lp img { transition: none; }
+.lp img:hover { transform: none; }
+
+.lp p { margin-bottom: 0; }
+
+.lp a { color: inherit; }
+
+.lp-section {
+	position: relative;
+	padding: clamp(48px, 6.5vw, 100px) 0;
+}
+
+.lp-section--tight { padding: clamp(38px, 4.8vw, 72px) 0; }
+
+.lp-container {
+	width: 100%;
+	max-width: 1180px;
+	margin: 0 auto;
+	padding: 0 clamp(16px, 4vw, 40px);
+}
+
+.lp-container--narrow { max-width: 880px; }
+
+/* ---- Tipografía --------------------------------------------------------- */
+.lp-eyebrow {
+	gap: 8px;
+	font-family: var(--lp-font-body);
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: .11em;
+	text-transform: uppercase;
+	color: var(--lp-purple-600);
+	margin-bottom: 16px;
+}
+
+.lp-eyebrow::before {
+	width: 22px;
+	height: 2px;
+	border-radius: 2px;
+	background: var(--lp-teal);
+}
+
+/* Escala tipográfica fluida: crece de forma continua entre 320px y ~1400px */
+.lp-h1 {
+	font-family: var(--lp-font-title);
+	font-size: clamp(1.75rem, 1.1rem + 3.1vw, 3.55rem);
+	line-height: 1.13;
+	font-weight: 800;
+	letter-spacing: -.022em;
+	color: var(--lp-plum);
+	margin: 0 0 18px;
+}
+
+.lp-h2 {
+	font-family: var(--lp-font-title);
+	font-size: clamp(1.45rem, 1.05rem + 1.9vw, 2.2rem);
+	line-height: 1.2;
+	font-weight: 800;
+	letter-spacing: -.02em;
+	color: var(--lp-ink);
+	margin: 0 0 14px;
+}
+
+/* Variante en morado de marca del titulo de seccion */
+.lp-h2--brand { color: var(--lp-purple); }
+
+.lp-h3 {
+	font-family: var(--lp-font-title);
+	font-size: clamp(1.05rem, 0.98rem + 0.34vw, 1.25rem);
+	line-height: 1.3;
+	font-weight: 700;
+	letter-spacing: -.01em;
+	color: var(--lp-plum);
+	margin: 0 0 8px;
+}
+
+.lp-lead {
+	font-size: clamp(0.95rem, 0.9rem + 0.26vw, 1.09rem);
+	line-height: 1.62;
+	color: var(--lp-ink-soft);
+}
+
+.lp-body {
+	font-size: clamp(0.9rem, 0.87rem + 0.15vw, 0.97rem);
+	line-height: 1.66;
+	color: var(--lp-ink-soft);
+}
+
+.lp-small {
+	font-size: clamp(0.8rem, 0.78rem + 0.1vw, 0.85rem);
+	line-height: 1.55;
+	color: var(--lp-ink-faint);
+}
+
+.lp-grad {
+	/* Degradado morado con un destello turquesa que recorre el texto.
+	   Empieza y termina en el mismo color para que el bucle no tenga salto. */
+	background: linear-gradient(100deg,
+		var(--lp-purple-600) 0%,
+		var(--lp-purple) 30%,
+		var(--lp-purple) 42%,
+		var(--lp-teal) 50%,
+		var(--lp-purple) 58%,
+		var(--lp-purple) 70%,
+		var(--lp-purple-600) 100%) 0 0 / 200% 100% repeat;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: var(--lp-purple);
+	animation: lp-grad-flow 5s linear infinite;
+}
+
+/* Mismo destello para títulos de sección: conserva el tono propio del título
+   (ciruela o morado) y solo lo recorre una franja más clara de la misma familia. */
+.lp-shine {
+	--lp-shine-base: var(--lp-ink);
+	--lp-shine-mid: var(--lp-purple-700);
+	--lp-shine-glow: var(--lp-purple-600);
+	background: linear-gradient(100deg,
+		var(--lp-shine-base) 0%,
+		var(--lp-shine-base) 45%,
+		var(--lp-shine-mid) 48%,
+		var(--lp-shine-glow) 50%,
+		var(--lp-shine-mid) 52%,
+		var(--lp-shine-base) 55%,
+		var(--lp-shine-base) 100%) 0 0 / 200% 100% repeat;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: lp-grad-flow 5s linear infinite;
+}
+
+.lp-h2--brand.lp-shine {
+	--lp-shine-base: var(--lp-purple);
+	--lp-shine-mid: #8F6AD3;
+	--lp-shine-glow: var(--lp-teal);
+}
+
+@keyframes lp-grad-flow {
+	from { background-position: 200% 0; }
+	to { background-position: 0% 0; }
+}
+
+.lp-head {
+	max-width: 720px;
+	margin: 0 auto 40px;
+	text-align: center;
+}
+
+.lp-head .lp-eyebrow { justify-content: center; }
+
+/* ---- Botones ------------------------------------------------------------ */
+.lp-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 9px;
+	font-family: var(--lp-font-body);
+	font-size: clamp(0.875rem, 0.85rem + 0.1vw, 0.92rem);
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: .01em;
+	padding: clamp(13px, 1.2vw, 16px) clamp(18px, 2.2vw, 28px);
+	border-radius: 999px;
+	border: 1.5px solid transparent;
+	text-decoration: none;
+	cursor: pointer;
+	transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+}
+
+.lp-btn:hover,
+.lp-btn:focus { text-decoration: none; }
+
+.lp-btn:focus-visible {
+	outline: 3px solid var(--lp-purple);
+	outline-offset: 3px;
+}
+
+.lp-btn--primary {
+	background: linear-gradient(120deg, var(--lp-purple) 0%, var(--lp-purple-600) 100%);
+	color: #fff !important;
+	box-shadow: 0 14px 30px -12px rgba(90, 50, 163, .75);
+}
+
+.lp-btn--primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 20px 38px -12px rgba(90, 50, 163, .85);
+	color: #fff !important;
+}
+
+.lp-btn--ghost {
+	background: #fff;
+	color: var(--lp-plum) !important;
+	border-color: var(--lp-line);
+	box-shadow: var(--lp-shadow-sm);
+}
+
+.lp-btn--ghost:hover {
+	transform: translateY(-2px);
+	border-color: var(--lp-purple);
+	color: var(--lp-purple-600) !important;
+}
+
+.lp-btn--white {
+	background: #fff;
+	color: var(--lp-plum) !important;
+	box-shadow: 0 16px 34px -16px rgba(0, 0, 0, .6);
+}
+
+.lp-btn--white:hover { transform: translateY(-2px); }
+
+.lp-btn--outline-light {
+	background: rgba(255, 255, 255, .1);
+	color: #fff !important;
+	border-color: rgba(255, 255, 255, .4);
+}
+
+.lp-btn--outline-light:hover {
+	background: #fff;
+	color: var(--lp-plum) !important;
+	transform: translateY(-2px);
+}
+
+.lp-btn--block { width: 100%; }
+
+.lp-btn--sm { padding: 12px 20px; font-size: 13.5px; }
+
+.lp-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--lp-purple-600) !important;
+	text-decoration: none;
+	transition: gap .25s ease, color .25s ease;
+}
+
+.lp-link:hover {
+	gap: 12px;
+	color: var(--lp-purple-600) !important;
+	text-decoration: none;
+}
+
+.lp-link__flecha {
+	flex-shrink: 0;
+	color: var(--lp-teal);
+	transition: transform .25s ease;
+}
+
+.lp-btn-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+/* ---- Hero --------------------------------------------------------------- */
+.lp-hero {
+	position: relative;
+	padding: clamp(168px, 13vw, 196px) 0 clamp(46px, 6vw, 90px);
+	background:
+		radial-gradient(760px 460px at 88% 4%, rgba(111, 66, 193, .20), transparent 62%),
+		radial-gradient(640px 480px at -6% 12%, rgba(49, 190, 190, .10), transparent 58%),
+		linear-gradient(180deg, #FFFFFF 0%, #F6F1FC 100%);
+	overflow: hidden;
+}
+
+.lp-hero__grid {
+	position: relative;
+	z-index: 1;
+	display: grid;
+	gap: 42px;
+	align-items: center;
+}
+
+.lp-hero__note {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px 20px;
+	margin-top: 24px;
+	padding-top: 22px;
+	border-top: 1px solid var(--lp-line);
+}
+
+.lp-hero__note span {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--lp-ink-soft);
+}
+
+.lp-hero__note i { color: var(--lp-teal); }
+
+.lp-hero__aside {
+	margin-top: 18px;
+	font-size: 13.5px;
+	color: var(--lp-ink-faint);
+}
+
+.lp-hero__aside a {
+	font-weight: 700;
+	color: var(--lp-purple-600) !important;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+/* La imagen del hero es un recorte con fondo transparente: por eso no lleva
+   tarjeta, y la sombra va con drop-shadow para seguir la silueta de los equipos.
+   hue-rotate lleva el azul de la captura al morado de marca mientras no exista
+   una captura propia de VeterChile: al reemplazar banner.png hay que quitarlo. */
+.lp-hero__media img {
+	display: block;
+	width: 100%;
+	height: auto;
+	filter:
+		hue-rotate(52deg) saturate(.92)
+		drop-shadow(0 22px 34px rgba(42, 20, 67, .20))
+		drop-shadow(0 6px 12px rgba(42, 20, 67, .12));
+}
+
+/* ---- Métricas ----------------------------------------------------------- */
+.lp-metrics {
+	position: relative;
+	z-index: 2;
+	background: linear-gradient(125deg, #4A2988 0%, #6338B4 50%, #6F42C1 100%);
+	overflow: hidden;
+}
+
+.lp-metrics::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(620px 300px at 82% 0%, rgba(49, 190, 190, .22), transparent 62%);
+	pointer-events: none;
+}
+
+.lp-metrics__grid {
+	position: relative;
+	display: grid;
+	gap: 8px;
+	grid-template-columns: 1fr;
+	padding: 46px 0;
+}
+
+.lp-metric {
+	text-align: center;
+	padding: 18px 14px;
+	border-radius: var(--lp-r-md);
+	transition: background .3s ease;
+}
+
+.lp-metric:hover { background: rgba(255, 255, 255, .07); }
+
+/* Iconos de la franja de métricas: cuadrados, fluidos y del mismo tamaño */
+.lp-metric__img {
+	display: block;
+	width: clamp(42px, 4vw, 50px);
+	height: auto;
+	max-width: 100%;
+	aspect-ratio: 1 / 1;
+	object-fit: contain;
+	margin: 0 auto 14px;
+}
+
+.lp-metric h3 {
+	font-family: var(--lp-font-title);
+	font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.4rem);
+	font-weight: 800;
+	letter-spacing: -.02em;
+	color: #fff;
+	margin: 0 0 4px;
+}
+
+.lp-metric p {
+	font-size: 13.5px;
+	font-weight: 500;
+	color: rgba(255, 255, 255, .92);
+	margin: 0;
+}
+
+/* ---- Rejilla de tarjetas ------------------------------------------------ */
+.lp-grid {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: 1fr;
+}
+
+/* ---- Tarjetas de rol ---------------------------------------------------- */
+.lp-role {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background: var(--lp-surface);
+	border: 1px solid var(--lp-line);
+	border-radius: var(--lp-r-lg);
+	padding: clamp(22px, 2.4vw, 30px) clamp(20px, 2.2vw, 28px);
+	box-shadow: var(--lp-shadow-sm);
+	overflow: hidden;
+	transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.lp-role:hover {
+	transform: translateY(-6px);
+	box-shadow: var(--lp-shadow-md);
+	border-color: transparent;
+}
+
+.lp-role__icon {
+	width: 54px;
+	height: 54px;
+	display: grid;
+	place-items: center;
+	border-radius: 17px;
+	font-size: 21px;
+	margin-bottom: 18px;
+	background: var(--lp-accent-soft, var(--lp-teal-100));
+	color: var(--lp-accent, var(--lp-teal));
+}
+
+.lp-role__tag {
+	display: block;
+	font-size: 0.85rem;
+	font-weight: 800;
+	letter-spacing: .09em;
+	text-transform: uppercase;
+	color: var(--lp-purple);
+	margin-bottom: 6px;
+}
+
+/* Ilustración del rol, sobre la etiqueta */
+.lp-role__img {
+	display: block;
+	width: clamp(34px, 2.6vw + 14px, 44px);
+	height: auto;
+	aspect-ratio: 1;
+	margin-bottom: clamp(10px, 1vw, 14px);
+}
+
+.lp-role ul {
+	list-style: none;
+	padding: 0;
+	margin: 16px 0 22px;
+}
+
+.lp-role ul li {
+	position: relative;
+	font-size: 14px;
+	line-height: 1.5;
+	color: var(--lp-ink-soft);
+	padding: 0 0 0 26px;
+	margin-bottom: 9px;
+}
+
+/* Check dibujado con CSS: no depende de ninguna fuente de iconos */
+.lp-role ul li::before {
+	content: "";
+	position: absolute;
+	left: 4px;
+	top: 5px;
+	width: 6px;
+	height: 11px;
+	border: solid var(--lp-accent, var(--lp-teal));
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.lp-role__foot { margin-top: auto; }
+
+/* La card completa es el enlace (<a class="lp-role">): cualquier clic dentro
+   de ella lleva al plan. "Ver plan" es solo la etiqueta visual. */
+.lp-role,
+.lp-role:hover,
+.lp-role:focus {
+	color: var(--lp-ink);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* La flecha se desplaza al pasar el mouse por cualquier parte de la card */
+.lp-role:hover .lp-link {
+	gap: 7px;
+	color: var(--lp-purple-600) !important;
+}
+
+.lp-role:hover .lp-link__flecha,
+.lp-role:focus-visible .lp-link__flecha {
+	transform: translateX(6px);
+}
+
+.lp-role:focus-visible {
+	outline: none;
+	border-color: var(--lp-purple);
+	box-shadow: var(--lp-shadow-md);
+}
+
+.lp-role--teal   { --lp-accent: #31BEBE; --lp-accent-soft: #E3F6F6; }
+.lp-role--blue   { --lp-accent: #6F42C1; --lp-accent-soft: #EFEAF9; }
+.lp-role--purple { --lp-accent: #5A32A3; --lp-accent-soft: #E6DDF6; }
+.lp-role--amber  { --lp-accent: #4A2988; --lp-accent-soft: #DCCFF3; }
+
+/* ---- Bloque multi-rol --------------------------------------------------- */
+.lp-combo {
+	position: relative;
+	margin-top: 34px;
+	border-radius: var(--lp-r-lg);
+	padding: clamp(26px, 3.2vw, 44px) clamp(20px, 3vw, 40px);
+	background: linear-gradient(125deg, #4A2988 0%, #6338B4 55%, #6F42C1 100%);
+	color: #fff;
+	overflow: hidden;
+	box-shadow: var(--lp-shadow-md);
+}
+
+.lp-combo::before {
+	content: "";
+	position: absolute;
+	right: -80px;
+	top: -110px;
+	width: 320px;
+	height: 320px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(255, 255, 255, .16), transparent 68%);
+}
+
+.lp-combo__inner {
+	position: relative;
+	display: grid;
+	gap: 26px;
+	align-items: center;
+}
+
+.lp-combo h3 {
+	font-family: var(--lp-font-title);
+	font-size: clamp(1.25rem, 1.05rem + 0.85vw, 1.55rem);
+	font-weight: 800;
+	letter-spacing: -.02em;
+	color: #fff;
+	margin: 0 0 10px;
+}
+
+.lp-combo p {
+	font-size: 15px;
+	line-height: 1.62;
+	color: rgba(255, 255, 255, .92);
+	margin: 0;
+}
+
+.lp-combo__chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 18px;
+}
+
+.lp-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: rgba(255, 255, 255, .12);
+	border: 1px solid rgba(255, 255, 255, .22);
+	border-radius: 999px;
+	padding: 8px 15px;
+	font-size: 12.5px;
+	font-weight: 600;
+	color: #fff;
+}
+
+.lp-chip i { color: var(--lp-teal-300); font-size: 11px; }
+
+/* ---- Funcionalidades ---------------------------------------------------- */
+.lp-feature {
+	display: grid;
+	gap: 26px;
+	align-items: center;
+	padding: 30px 0;
+}
+
+.lp-feature + .lp-feature { border-top: 1px solid var(--lp-line); }
+
+.lp-feature__media {
+	position: relative;
+	border-radius: var(--lp-r-lg);
+	padding: clamp(16px, 2.4vw, 32px);
+	text-align: center;
+}
+
+.lp-feature__media img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+.lp-feature__num {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	font-family: var(--lp-font-title);
+	font-size: 12px;
+	font-weight: 800;
+	letter-spacing: .09em;
+	text-transform: uppercase;
+	color: var(--lp-purple-600);
+	margin-bottom: 12px;
+}
+
+.lp-feature__num span {
+	width: 26px;
+	height: 26px;
+	display: grid;
+	place-items: center;
+	border-radius: 9px;
+	background: var(--lp-purple-100);
+	font-size: 12px;
+}
+
+.lp-feature__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 18px;
+}
+
+.lp-tag {
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--lp-purple-600);
+	background: var(--lp-purple-100);
+	border-radius: 999px;
+	padding: 6px 13px;
+}
+
+/* ---- Pasos -------------------------------------------------------------- */
+.lp-steps {
+	display: grid;
+	gap: 18px;
+	grid-template-columns: 1fr;
+	counter-reset: lpstep;
+}
+
+.lp-step {
+	position: relative;
+	background: var(--lp-surface);
+	border: 1px solid var(--lp-line);
+	border-radius: var(--lp-r-md);
+	padding: 20px 18px 18px;
+	box-shadow: var(--lp-shadow-sm);
+	transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.lp-step:hover {
+	transform: translateY(-5px);
+	box-shadow: var(--lp-shadow-md);
+}
+
+.lp-step__num {
+	counter-increment: lpstep;
+	width: 36px;
+	height: 36px;
+	display: grid;
+	place-items: center;
+	border-radius: 50%;
+	background: linear-gradient(140deg, var(--lp-purple), var(--lp-purple-600));
+	color: #fff;
+	font-family: var(--lp-font-title);
+	font-weight: 800;
+	font-size: 16px;
+	margin-bottom: 12px;
+	box-shadow: 0 10px 22px -12px rgba(90, 50, 163, .9);
+}
+
+.lp-step__num::before { content: counter(lpstep); }
+
+/* ---- Planes ------------------------------------------------------------- */
+.lp-plans {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: 1fr;
+	align-items: stretch;
+}
+
+.lp-plan {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background: var(--lp-surface);
+	border: 1px solid var(--lp-line);
+	border-radius: var(--lp-r-lg);
+	padding: clamp(24px, 2.6vw, 32px) clamp(20px, 2.2vw, 28px) clamp(22px, 2.2vw, 28px);
+	box-shadow: var(--lp-shadow-sm);
+	transition: transform .3s ease, box-shadow .3s ease;
+}
+
+/* Punto de llegada del scroll desde las cards de roles. Va por encima de la
+   card para que el encabezado fijo no la tape al llegar. */
+.lp-plan__ancla {
+	position: absolute;
+	top: -90px;
+	left: 0;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+}
+
+@media (max-width: 767.98px) {
+	.lp-plan__ancla { top: -96px; }
+}
+
+/* Anillo del plan "abierto" (ver más abajo). Los planes no tienen efecto
+   hover: este borde solo aparece al elegir un rol. */
+.lp-plan::after {
+	content: "";
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	bottom: -1px;
+	left: -1px;
+	border-radius: inherit;
+	border: 1px solid rgba(49, 190, 190, .65);
+	box-shadow: 0 0 0 4px rgba(49, 190, 190, .1), 0 22px 46px -28px rgba(49, 190, 190, .7);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity .18s ease;
+}
+
+.lp-plan--featured {
+	border-color: transparent;
+	background: linear-gradient(180deg, #FFFFFF, #FAF8FE);
+	box-shadow: 0 0 0 2px var(--lp-purple), var(--lp-shadow-md);
+}
+
+/* El plan destacado ya tiene anillo propio: el halo va por fuera de él */
+.lp-plan--featured::after {
+	top: -3px;
+	right: -3px;
+	bottom: -3px;
+	left: -3px;
+	border-color: transparent;
+	box-shadow: 0 0 0 4px rgba(49, 190, 190, .14), 0 22px 46px -26px rgba(49, 190, 190, .75);
+}
+
+/* Plan "abierto": al hacer clic en una card de rol, su plan queda destacado
+   (borde turquesa fino, el acento de marca) y los demás se atenúan; a los 2 segundos todo vuelve
+   solo a la normalidad. Solo CSS: la animación arranca cuando la card toma
+   el foco, y :not(:active) hace que se repita si se vuelve a hacer clic. */
+body:has(.lp-role--teal:focus:not(:active)) .lp-plan--teal::after,
+body:has(.lp-role--blue:focus:not(:active)) .lp-plan--blue::after,
+body:has(.lp-role--purple:focus:not(:active)) .lp-plan--purple::after,
+body:has(.lp-role--amber:focus:not(:active)) .lp-plan--amber::after {
+	border: 1px solid #31bebe;
+	box-shadow: 0 0 0 2px rgba(49, 190, 190, .14), 0 22px 46px -30px rgba(49, 190, 190, .6);
+	animation: lp-plan-anillo 2s ease both;
+}
+
+body:has(.lp-role--teal:focus:not(:active)) .lp-plan:not(.lp-plan--teal),
+body:has(.lp-role--blue:focus:not(:active)) .lp-plan:not(.lp-plan--blue),
+body:has(.lp-role--purple:focus:not(:active)) .lp-plan:not(.lp-plan--purple),
+body:has(.lp-role--amber:focus:not(:active)) .lp-plan:not(.lp-plan--amber) {
+	animation: lp-plan-atenuar 2s ease both;
+}
+
+/* Entra en 0,16 s (mientras dura el scroll), se mantiene y sale en 0,2 s */
+@keyframes lp-plan-anillo {
+	0% { opacity: 0; }
+	8%, 90% { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+@keyframes lp-plan-atenuar {
+	0% { filter: opacity(1); }
+	8%, 90% { filter: opacity(.5); }
+	100% { filter: opacity(1); }
+}
+
+/* Ilustración del rol, sobre el nombre del plan */
+.lp-plan__img {
+	display: block;
+	width: 44px;
+	height: 44px;
+	margin-bottom: clamp(10px, 1vw, 14px);
+}
+
+.lp-plan__flag {
+	position: absolute;
+	top: -13px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: linear-gradient(120deg, var(--lp-purple), var(--lp-purple-600));
+	color: #fff;
+	font-size: 11px;
+	font-weight: 800;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	padding: 7px 16px;
+	border-radius: 999px;
+	white-space: nowrap;
+	box-shadow: 0 10px 22px -12px rgba(90, 50, 163, .9);
+}
+
+.lp-plan__icon {
+	width: 44px;
+	height: 44px;
+	display: grid;
+	place-items: center;
+	border-radius: 14px;
+	font-size: 17px;
+	margin-bottom: 14px;
+	background: var(--lp-accent-soft, var(--lp-teal-100));
+	color: var(--lp-accent, var(--lp-teal));
+}
+
+.lp-plan__meta {
+	display: block;
+	margin: 12px 0 2px;
+	font-family: var(--lp-font-title);
+	font-size: 15px;
+	font-weight: 800;
+	color: var(--lp-plum);
+}
+
+.lp-plan ul {
+	list-style: none;
+	padding: 0;
+	margin: 16px 0 20px;
+}
+
+.lp-plan ul li {
+	position: relative;
+	font-size: 13.5px;
+	line-height: 1.45;
+	color: var(--lp-ink-soft);
+	padding: 0 0 0 22px;
+	margin-bottom: 8px;
+}
+
+.lp-plan ul li::before {
+	content: "";
+	position: absolute;
+	left: 4px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid #31bebe;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.lp-plan__foot { margin-top: auto; }
+
+.lp-plan--teal   { --lp-accent: #31BEBE; --lp-accent-soft: #E3F6F6; }
+.lp-plan--blue   { --lp-accent: #6F42C1; --lp-accent-soft: #EFEAF9; }
+.lp-plan--purple { --lp-accent: #5A32A3; --lp-accent-soft: #E6DDF6; }
+.lp-plan--amber  { --lp-accent: #4A2988; --lp-accent-soft: #DCCFF3; }
+
+.lp-plans-note {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	margin-top: 26px;
+	background: var(--lp-surface);
+	border: 1px dashed var(--lp-line);
+	border-radius: var(--lp-r-md);
+	padding: 20px 22px;
+}
+
+.lp-plans-note i {
+	color: var(--lp-teal);
+	font-size: 17px;
+	margin-top: 2px;
+}
+
+/* ---- Alianzas ----------------------------------------------------------- */
+/* El ancla #alianzas deja libre el alto del encabezado fijo */
+#alianzas { scroll-margin-top: 110px; }
+
+/* Logos sueltos, a color y sin ficha: se igualan por alto para que se vean
+   parejos aunque cada uno tenga otra proporción. */
+.lp-logos {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: clamp(22px, 3vw, 36px) clamp(28px, 5vw, 72px);
+}
+
+.lp-logos a {
+	display: block;
+	border-radius: var(--lp-r-sm);
+}
+
+.lp-logos a:focus-visible {
+	outline: 2px solid var(--lp-purple);
+	outline-offset: 6px;
+}
+
+.lp-logos img {
+	display: block;
+	width: auto;
+	max-width: clamp(132px, 16vw, 200px);
+	height: clamp(40px, 4.6vw, 62px);
+	object-fit: contain;
+}
+
+/* ---- Preguntas frecuentes ----------------------------------------------- */
+.lp-faq .card {
+	background: var(--lp-surface);
+	border: 1px solid var(--lp-line) !important;
+	border-radius: var(--lp-r-md) !important;
+	box-shadow: none;
+	margin-bottom: 12px;
+	overflow: hidden;
+	transition: border-color .25s ease, box-shadow .25s ease;
+}
+
+.lp-faq .card:hover {
+	border-color: rgba(111, 66, 193, .45) !important;
+	box-shadow: var(--lp-shadow-sm);
+}
+
+.lp-faq .card-header {
+	background: transparent;
+	border: none !important;
+	padding: 0;
+}
+
+.lp-faq .btn-acc {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	text-align: left;
+	font-family: var(--lp-font-title);
+	font-size: 15.5px;
+	font-weight: 700;
+	color: var(--lp-plum);
+	padding: 19px 22px;
+	white-space: normal;
+	box-shadow: none !important;
+}
+
+.lp-faq .btn-acc:hover,
+.lp-faq .btn-acc:focus { color: var(--lp-purple-600); }
+
+.lp-faq .btn-acc::after {
+	content: "\2212";
+	font-family: var(--lp-font-title);
+	font-weight: 700;
+	font-size: 17px;
+	line-height: 1;
+	position: static;
+	right: auto;
+	top: auto;
+	transform: none;
+	flex-shrink: 0;
+	width: 28px;
+	height: 28px;
+	display: grid;
+	place-items: center;
+	border-radius: 50%;
+	background: var(--lp-purple-100);
+	color: var(--lp-purple-600);
+	transition: background .3s ease, color .3s ease;
+}
+
+.lp-faq .btn-acc.collapsed::after { content: "\2b"; }
+
+.lp-faq .card-body {
+	padding: 0 22px 22px;
+	font-size: 14.5px;
+	line-height: 1.66;
+	color: var(--lp-ink-soft);
+	border: none !important;
+}
+
+.lp-faq .card-body p { margin-bottom: 0; }
+
+.lp-faq .card-body a {
+	color: var(--lp-purple-600) !important;
+	font-weight: 700;
+}
+
+/* ---- CTA de cierre ------------------------------------------------------ */
+.lp-cta {
+	position: relative;
+	border-radius: var(--lp-r-lg);
+	padding: clamp(36px, 4.5vw, 66px) clamp(20px, 3.4vw, 48px);
+	text-align: center;
+	background: linear-gradient(125deg, #4A2988 0%, #6338B4 55%, #6F42C1 100%);
+	color: #fff;
+	overflow: hidden;
+	box-shadow: var(--lp-shadow-md);
+}
+
+.lp-cta::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(420px 220px at 12% 0%, rgba(255, 255, 255, .16), transparent 60%),
+		radial-gradient(420px 240px at 92% 100%, rgba(127, 227, 223, .22), transparent 62%);
+	pointer-events: none;
+}
+
+.lp-cta__inner { position: relative; }
+
+.lp-cta h2 {
+	font-family: var(--lp-font-title);
+	font-size: clamp(1.45rem, 1.05rem + 1.9vw, 2.2rem);
+	font-weight: 800;
+	letter-spacing: -.02em;
+	color: #fff;
+	margin: 0 0 12px;
+}
+
+.lp-cta p {
+	font-size: clamp(0.95rem, 0.9rem + 0.26vw, 1.05rem);
+	line-height: 1.6;
+	color: rgba(255, 255, 255, .84);
+	max-width: 620px;
+	margin: 0 auto 26px;
+}
+
+.lp-cta .lp-btn-row { justify-content: center; }
+
+/* ---- Contacto ----------------------------------------------------------- */
+.lp-contact {
+	background: linear-gradient(180deg, #F8F6FB 0%, #ECE5F8 100%);
+}
+
+.lp-contact__card {
+	display: grid;
+	gap: 0;
+	background: var(--lp-surface);
+	border: 1px solid var(--lp-line);
+	border-radius: var(--lp-r-lg);
+	overflow: hidden;
+	box-shadow: var(--lp-shadow-md);
+}
+
+.lp-contact__form { padding: clamp(24px, 3vw, 46px) clamp(18px, 2.6vw, 42px); }
+
+.lp-contact__side {
+	padding: clamp(24px, 3vw, 46px) clamp(18px, 2.6vw, 40px);
+	background: linear-gradient(160deg, #4A2988, #6338B4);
+	color: #fff;
+}
+
+.lp-contact__side h3 { color: #fff; }
+
+.lp-contact .form-group { margin-bottom: 16px; }
+
+.lp-contact label {
+	font-family: var(--lp-font-body);
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--lp-plum) !important;
+	margin-bottom: 6px;
+	letter-spacing: .01em;
+}
+
+.lp-contact .form-control {
+	height: auto;
+	font-size: 14.5px;
+	padding: 12px 15px;
+	border-radius: var(--lp-r-sm) !important;
+	border: 1.5px solid var(--lp-line);
+	background: #FCFAFE;
+	color: var(--lp-ink);
+	transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.lp-contact .form-control:focus {
+	background: #fff;
+	border-color: var(--lp-purple);
+	box-shadow: 0 0 0 4px rgba(111, 66, 193, .16);
+}
+
+.lp-contact textarea.form-control { min-height: 132px; }
+
+.lp-contact .btn-azul {
+	border-radius: 999px !important;
+	padding: 15px 26px;
+	font-size: 14.5px;
+	font-weight: 700;
+	letter-spacing: .01em;
+	background: linear-gradient(120deg, var(--lp-purple) 0%, var(--lp-purple-600) 100%);
+	box-shadow: none !important;
+	margin-bottom: 8px;
+}
+
+/* Icono de envío: aparece al pasar el cursor, sin tocar el HTML del botón */
+.lp-contact .btn-azul::after {
+	content: "";
+	display: inline-block;
+	width: 0;
+	height: 17px;
+	margin-left: 0;
+	vertical-align: -3px;
+	background: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 2L11 13'/%3E%3Cpath d='M22 2l-7 20-4-9-9-4 20-7z'/%3E%3C/svg%3E") center / 17px 17px no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 2L11 13'/%3E%3Cpath d='M22 2l-7 20-4-9-9-4 20-7z'/%3E%3C/svg%3E") center / 17px 17px no-repeat;
+	opacity: 0;
+	transform: translateX(-6px);
+	transition: width .55s cubic-bezier(.22, 1, .36, 1), margin-left .55s cubic-bezier(.22, 1, .36, 1), opacity .45s ease, transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+
+.lp-contact .btn-azul:hover::after,
+.lp-contact .btn-azul:focus-visible::after {
+	width: 17px;
+	margin-left: 10px;
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.lp-contact .btn-azul[disabled]::after { display: none; }
+
+.lp-info {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	padding: 14px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+
+.lp-info:last-of-type { border-bottom: none; }
+
+/* Iconos de los datos de contacto: la imagen ya trae su propio círculo */
+.lp-info__img {
+	display: block;
+	width: clamp(34px, 3.2vw, 40px);
+	height: auto;
+	max-width: 100%;
+	aspect-ratio: 1 / 1;
+	object-fit: contain;
+	flex-shrink: 0;
+}
+
+.lp-info b {
+	display: block;
+	font-family: var(--lp-font-title);
+	font-size: 14px;
+	color: #fff;
+	margin-bottom: 2px;
+}
+
+.lp-info span {
+	display: block;
+	font-size: 13.5px;
+	line-height: 1.5;
+	color: rgba(255, 255, 255, .9);
+}
+
+.lp-info a { color: rgba(255, 255, 255, .9) !important; }
+.lp-info a:hover { color: var(--lp-teal-300) !important; }
+
+.lp-map {
+	margin-top: 18px;
+	border-radius: var(--lp-r-md);
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, .14);
+	line-height: 0;
+}
+
+.lp-map iframe {
+	display: block;
+	width: 100%;
+	height: 230px;
+	border: 0;
+	filter: grayscale(.3);
+}
+
+/* ---- Animación de entrada ----------------------------------------------- */
+/* El estado oculto solo se aplica si el script de aparición está activo,
+   así el contenido nunca queda invisible sin JavaScript. */
+.lp-js .lp-reveal {
+	opacity: 0;
+	transform: translateY(26px);
+	transition: opacity .7s ease, transform .7s cubic-bezier(.22, .8, .28, 1);
+}
+
+.lp-reveal.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* Escalonado de entrada: el paso de .15s hace visible la cascada en las grillas
+   de cuatro tarjetas (roles, pasos y planes) sin que la última se sienta lenta. */
+.lp-reveal[data-delay="1"] { transition-delay: .15s; }
+.lp-reveal[data-delay="2"] { transition-delay: .30s; }
+.lp-reveal[data-delay="3"] { transition-delay: .45s; }
+.lp-reveal[data-delay="4"] { transition-delay: .60s; }
+.lp-reveal[data-delay="5"] { transition-delay: .75s; }
+
+/* ---- Responsive ---------------------------------------------------------
+   Los tamaños ya escalan solos con clamp(); aquí solo cambia la estructura.
+   -------------------------------------------------------------------------- */
+
+/* La imagen del hero solo acompaña en escritorio (lg+): de md hacia abajo se
+   oculta, que es justo donde .lp-hero__grid deja de ser de dos columnas. */
+@media (max-width: 991.98px) {
+	.lp-hero__media { display: none; }
+}
+
+/* Teléfonos muy angostos (320–400px) */
+@media (max-width: 400px) {
+	.lp-btn-row { flex-direction: column; align-items: stretch; }
+	.lp-btn-row .lp-btn { width: 100%; }
+	.lp-hero__note { gap: 9px 14px; }
+	.lp-hero__note span { font-size: 12.5px; }
+	.lp-chip { font-size: 11.5px; padding: 7px 12px; }
+	.lp-faq .btn-acc { font-size: 14.5px; padding: 16px 16px; }
+	.lp-faq .card-body { padding: 0 16px 18px; }
+	.lp-plans-note { flex-direction: column; gap: 10px; }
+}
+
+/* Teléfonos grandes en horizontal / tablets pequeñas */
+@media (min-width: 576px) {
+	.lp-metrics__grid { grid-template-columns: repeat(3, 1fr); }
+	.lp-grid { grid-template-columns: repeat(2, 1fr); }
+	.lp-steps { grid-template-columns: repeat(2, 1fr); }
+	.lp-plans { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+	.lp-combo__inner { grid-template-columns: 1.5fr 1fr; }
+	.lp-feature { grid-template-columns: repeat(2, 1fr); gap: clamp(30px, 3.5vw, 52px); padding: clamp(34px, 3.4vw, 52px) 0; }
+	.lp-feature--flip .lp-feature__media { order: -1; }
+}
+
+/* Escritorio */
+@media (min-width: 992px) {
+	.lp-hero__grid { grid-template-columns: 1.06fr .94fr; gap: clamp(38px, 4vw, 64px); }
+	.lp-grid--4 { grid-template-columns: repeat(4, 1fr); }
+	.lp-steps { grid-template-columns: repeat(4, 1fr); }
+	.lp-plans { grid-template-columns: repeat(4, 1fr); }
+	.lp-contact__card { grid-template-columns: 1.05fr .95fr; }
+	.lp-map iframe { height: 268px; }
+}
+
+/* Monitores anchos: el contenido acompaña el ancho en vez de quedar angosto */
+@media (min-width: 1600px) {
+	.lp-container { max-width: 1320px; }
+	.lp-container--narrow { max-width: 960px; }
+	.lp-map iframe { height: 300px; }
+}
+
+@media (min-width: 1920px) {
+	.lp-container { max-width: 1440px; }
+	.lp-grid { gap: 26px; }
+	.lp-plans { gap: 26px; }
+	.lp-map iframe { height: 330px; }
+}
+
+/* ---- Movimiento reducido ------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+	.lp-js .lp-reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+
+	.lp *,
+	.lp *::before,
+	.lp *::after {
+		animation-duration: .01ms !important;
+		transition-duration: .01ms !important;
+	}
+
+	.lp-grad,
+	.lp-shine { animation: none; }
+}
+
+/* ---- Página de contacto -------------------------------------------------
+   La cabecera es fija, así que la primera sección necesita aire arriba.
+   -------------------------------------------------------------------------- */
+.lp-section--page-top { padding-top: clamp(150px, 12vw, 178px); }
+
+/* ---- Avisos del formulario de contacto ---------------------------------- */
+.lp-form-msg {
+	display: block;
+	margin-bottom: 18px;
+	padding: 13px 16px;
+	border-radius: var(--lp-r-sm);
+	border: 1px solid transparent;
+	font-size: 13.5px;
+	line-height: 1.5;
+}
+
+.lp-form-msg--ok {
+	background: var(--lp-teal-100);
+	border-color: rgba(49, 190, 190, .5);
+	color: var(--lp-teal-600);
+}
+
+.lp-form-msg--error {
+	background: #FDECEC;
+	border-color: rgba(190, 60, 60, .28);
+	color: #9E2A2A;
+}
+
+/* Campo trampa contra el spam: invisible, pero sin display:none para que
+   los robots sí lo encuentren y lo completen. */
+.lp-form-trampa {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.lp-contact .btn-azul[disabled] {
+	opacity: .7;
+	transform: none;
+	cursor: progress;
+}
+
+/* El logo de Veterfarma es un PNG con fondo blanco: multiply lo funde con el fondo de la sección */
+.lp-logos img[src$=".png"] { mix-blend-mode: multiply; }
+
+/* ==========================================================================
+   Versión clara: predominan el blanco y los neutros. El morado queda para
+   títulos, botones y detalles; ya no hay bloques de fondo morado sólido.
+   ========================================================================== */
+:root {
+	--lp-bg: #F7F8FA;
+	--lp-line: #EAE6F3;
+}
+
+.lp-hero {
+	background:
+		radial-gradient(760px 460px at 88% 4%, rgba(111, 66, 193, .08), transparent 62%),
+		radial-gradient(640px 480px at -6% 12%, rgba(49, 190, 190, .05), transparent 58%),
+		#FFFFFF;
+}
+
+
+/* Bloque multi-rol: tarjeta blanca con borde */
+.lp-combo {
+	background: #FFFFFF;
+	border: 1px solid var(--lp-line);
+	color: var(--lp-ink);
+	box-shadow: var(--lp-shadow-sm);
+}
+
+.lp-combo::before { display: none; }
+.lp-combo h3 { color: var(--lp-plum); }
+.lp-combo p { color: var(--lp-ink-soft); }
+
+.lp-chip {
+	background: var(--lp-bg);
+	border-color: var(--lp-line);
+	color: var(--lp-ink);
+}
+
+.lp-chip i { color: var(--lp-teal-600); }
+
+/* Contacto: panel de datos en gris muy claro */
+.lp-contact { background: var(--lp-bg); }
+
+.lp-contact__side {
+	background: var(--lp-bg);
+	border-left: 1px solid var(--lp-line);
+	color: var(--lp-ink);
+}
+
+.lp-contact__side h3 { color: var(--lp-plum); }
+.lp-info { border-bottom-color: var(--lp-line); }
+.lp-info b { color: var(--lp-plum); }
+.lp-info span { color: var(--lp-ink-soft); }
+.lp-info a { color: var(--lp-ink-soft) !important; }
+.lp-info a:hover { color: var(--lp-purple-600) !important; }
+.lp-map { border-color: var(--lp-line); }
+
+/* Los íconos son un círculo blanco calado: el fondo morado dibuja el glifo */
+.lp-info__img {
+	border-radius: 50%;
+	background: var(--lp-purple);
+	box-shadow: 0 0 0 1px var(--lp-line);
+}
+
+@media (max-width: 991.98px) {
+	.lp-contact__side { border-left: 0; border-top: 1px solid var(--lp-line); }
+}
+
+/* ==========================================================================
+   Botones planos (todos los CTA de la landing y del menú)
+   Radio 12px, color plano, sin sombra ni desplazamiento.
+   En hover solo cambia levemente el tono.
+   ========================================================================== */
+.lp-btn,
+.navbar-modern .btn.btn-info,
+.navbar-modern .btn.btn-purple,
+.lp-contact .btn-azul {
+	border-radius: 12px !important;
+	box-shadow: none !important;
+	transform: none !important;
+	transition: background-color .2s ease, border-color .2s ease, color .2s ease !important;
+}
+.lp-btn:hover i,
+.navbar-modern .btn:hover i { transform: none !important; }
+
+/* Primario: morado plano */
+.lp-btn--primary,
+.navbar-modern .btn.btn-purple,
+.navbar-modern .btn.btn-purple:focus,
+.navbar-modern .btn.btn-purple:active,
+.lp-contact .btn-azul,
+.lp-contact .btn-azul:focus,
+.lp-contact .btn-azul:active {
+	background: #6F42C1 !important;
+	border: 1.5px solid #6F42C1 !important;
+	color: #FFFFFF !important;
+}
+.lp-btn--primary:hover,
+.navbar-modern .btn.btn-purple:hover,
+.lp-contact .btn-azul:hover {
+	background: #5E36AB !important;
+	border-color: #5E36AB !important;
+	color: #FFFFFF !important;
+}
+
+/* Secundario: blanco con borde morado */
+.lp-btn--ghost,
+.navbar-modern .btn.btn-info,
+.navbar-modern .btn.btn-info:focus,
+.navbar-modern .btn.btn-info:active {
+	background: #FFFFFF !important;
+	border: 1.5px solid #6F42C1 !important;
+	color: #5A32A3 !important;
+}
+.lp-btn--ghost:hover,
+.navbar-modern .btn.btn-info:hover {
+	background: #F2EEFA !important;
+	border-color: #5E36AB !important;
+	color: #4A2988 !important;
+}
+
+/* Variantes para fondos oscuros (por si se reactivan) */
+.lp-btn--white { background: #FFFFFF !important; color: #5A32A3 !important; }
+.lp-btn--white:hover { background: #F2EEFA !important; }
+.lp-btn--outline-light:hover { background: rgba(255, 255, 255, .9) !important; }

@@ -1,0 +1,11 @@
+# Archivos de trabajo con Claude (no se suben)
+CLAUDE.md
+DESIGN.md
+.claude/
+
+# Logs
+logs/*.log
+
+# Respaldos y copias
+*_bak*
+*- copia*

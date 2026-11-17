@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none" stroke-linecap="round" stroke-linejoin="round">
+	<!-- Tutor: cabeza en turquesa, hombros en morado (mismo corte de color que los demás roles) -->
+	<circle cx="200" cy="132" r="88" stroke="#31bebe" stroke-width="18"/>
+	<path d="M34 474v-34c0-92 74-166 166-166 28 0 55 7 78 19" stroke="#6F42C1" stroke-width="18"/>
+	<!-- Mascota: huella -->
+	<g fill="#6F42C1">
+		<ellipse cx="302" cy="346" rx="22" ry="29" transform="rotate(-24 302 346)"/>
+		<ellipse cx="350" cy="306" rx="22" ry="30" transform="rotate(-8 350 306)"/>
+		<ellipse cx="406" cy="306" rx="22" ry="30" transform="rotate(8 406 306)"/>
+		<ellipse cx="454" cy="346" rx="22" ry="29" transform="rotate(24 454 346)"/>
+		<path d="M378 362c-38 0-72 36-72 68 0 26 19 40 42 40 12 0 19-5 30-5s18 5 30 5c23 0 42-14 42-40 0-32-34-68-72-68z"/>
+	</g>
+</svg>

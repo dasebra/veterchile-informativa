@@ -1,0 +1,563 @@
+/* ==========================================================================
+   style.css — Rediseño visual del menú principal (navbar)
+   Solo estilos. No contiene ni depende de cambios de lógica/JS.
+   Se carga después de main.css para poder sobrescribir sus reglas de nav.
+   ========================================================================== */
+
+:root {
+	/* Identidad VeterChile: morado principal y turquesa (#31BEBE) como acento */
+	--nav-accent-1: #31BEBE;
+	--nav-accent-2: #6F42C1;
+	--nav-primary: #6F42C1;
+	--nav-primary-dark: #5A32A3;
+	--nav-plum: #2A1443;
+	--nav-purple: #5A32A3;
+	--nav-purple-dark: #4A2988;
+	--nav-text: #1F1730;
+	--nav-gradient: linear-gradient(90deg, var(--nav-accent-1), var(--nav-primary));
+}
+
+/* ---- Barra superior (sobre el menú) ------------------------------------ */
+.site-header {
+	z-index: 1030;
+}
+
+.sdi-topbar {
+	background: linear-gradient(90deg, #4A2988 0%, #6338B4 100%);
+	color: #fff;
+	font-family: 'Inter', sans-serif;
+	font-size: 0.78rem;
+	line-height: 1.3;
+}
+
+.sdi-topbar__inner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 6px 18px;
+	max-width: 1320px;
+	margin: 0 auto;
+	padding: 7px 16px;
+}
+
+.sdi-topbar__social,
+.sdi-topbar__contact {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px 18px;
+}
+
+.sdi-topbar__icon {
+	width: 26px;
+	height: 26px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	color: #fff !important;
+	background: rgba(255, 255, 255, 0.12);
+	text-decoration: none !important;
+	transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.sdi-topbar__icon:hover {
+	background: rgba(255, 255, 255, 0.26);
+	transform: translateY(-1px);
+}
+
+.sdi-topbar__icon svg {
+	display: block;
+}
+
+.sdi-topbar__item {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	font-size: 0.78rem;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.88) !important;
+	text-decoration: none !important;
+	transition: color 0.25s ease;
+}
+
+.sdi-topbar__item:hover {
+	color: #fff !important;
+}
+
+.sdi-topbar__item svg {
+	flex-shrink: 0;
+	opacity: 0.75;
+}
+
+.sdi-topbar__icon:focus-visible,
+.sdi-topbar__item:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.7);
+	outline-offset: 2px;
+}
+
+/* Lema rotativo: dos frases apiladas en la misma celda que se turnan */
+.sdi-topbar__lema {
+	display: grid;
+	justify-items: start;
+	/* Se queda junto a las redes y empuja los contactos a la derecha */
+	margin: 0 auto 0 0;
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+	white-space: nowrap;
+	color: #fff;
+}
+
+.sdi-topbar__frase {
+	grid-area: 1 / 1;
+	opacity: 0;
+	animation: sdi-lema-turno 9s ease-in-out infinite;
+}
+
+.sdi-topbar__frase + .sdi-topbar__frase {
+	animation-delay: 4.5s;
+}
+
+@keyframes sdi-lema-turno {
+	0% { opacity: 0; transform: translateY(7px); }
+	10%, 40% { opacity: 1; transform: translateY(0); }
+	50%, 100% { opacity: 0; transform: translateY(-7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sdi-topbar__lema {
+		display: block;
+	}
+
+	.sdi-topbar__frase {
+		opacity: 1;
+		animation: none;
+	}
+
+	.sdi-topbar__frase + .sdi-topbar__frase::before {
+		content: " | ";
+	}
+}
+
+@media (max-width: 767.98px) {
+	.sdi-topbar__inner {
+		justify-content: center;
+		gap: 4px 14px;
+		padding: 6px 12px;
+	}
+
+	/* En pantallas chicas el lema ocupa su propia línea, sobre los contactos */
+	.sdi-topbar__lema {
+		order: -1;
+		flex-basis: 100%;
+		justify-items: center;
+		margin-right: 0;
+		font-size: 0.74rem;
+	}
+
+	.sdi-topbar__item {
+		font-size: 0.72rem;
+		gap: 5px;
+	}
+
+	.sdi-topbar__contact { gap: 4px 14px; }
+
+	.sdi-topbar__icon {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+/* Las páginas con encabezado secundario necesitan más aire por la barra superior */
+.titulo-anexo {
+	padding-top: 175px;
+}
+
+@media (min-width: 992px) {
+	.titulo-anexo {
+		padding-top: 180px;
+	}
+}
+
+/* ---- Contenedor del navbar ------------------------------------------- */
+.navbar-modern {
+	padding-top: 0.7rem;
+	padding-bottom: 0.7rem;
+	background: rgba(255, 255, 255, 0.82) !important;
+	backdrop-filter: blur(14px) saturate(160%);
+	-webkit-backdrop-filter: blur(14px) saturate(160%);
+	box-shadow: 0 4px 30px rgba(42, 20, 67, 0.07);
+	border-bottom: 1px solid rgba(111, 66, 193, 0.08);
+	transition: box-shadow 0.35s ease, padding 0.35s ease, background 0.35s ease;
+}
+
+.navbar-modern:hover {
+	box-shadow: 0 8px 34px rgba(42, 20, 67, 0.1);
+}
+
+/* ---- Logo -------------------------------------------------------------- */
+/* Separa el logo del borde izquierdo; crece con el ancho de pantalla */
+.navbar-modern .navbar-brand {
+	margin-left: clamp(0.25rem, 1.5vw, 1.5rem);
+}
+
+.navbar-modern .navbar-brand img,
+.navbar-modern .navbar-brand:hover img {
+	transform: none;
+	filter: none;
+	transition: opacity 0.25s ease;
+}
+
+.navbar-modern .navbar-brand:hover img {
+	opacity: 0.85;
+}
+
+/* ---- Links de navegación ------------------------------------------------ */
+.navbar-modern .nav-link {
+	position: relative;
+	color: var(--nav-text) !important;
+	font-size: 0.9rem;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+	padding: 0.5rem 0.2rem !important;
+	transition: color 0.3s ease;
+}
+
+.navbar-modern .nav-item {
+	position: relative;
+}
+
+.navbar-modern .nav-link::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -2px;
+	width: 0%;
+	height: 2px;
+	background: var(--nav-gradient);
+	border-radius: 2px;
+	transform: translateX(-50%);
+	transition: width 0.32s cubic-bezier(.4,0,.2,1);
+}
+
+.navbar-modern .nav-link:hover,
+.navbar-modern .nav-link:focus {
+	color: var(--nav-primary) !important;
+	border-bottom: none !important;
+}
+
+.navbar-modern .nav-link:hover::after,
+.navbar-modern .nav-link:focus::after,
+.navbar-modern .nav-item.active .nav-link::after {
+	width: 100%;
+}
+
+/* El ítem activo se marca solo con la línea inferior, sin cambio de color */
+.navbar-modern .nav-item.active .nav-link {
+	color: var(--nav-text) !important;
+}
+
+/* ---- Botones de acción (Ingresar / Agendar Hora) ------------------------ */
+.navbar-modern .btn {
+	border-radius: 50px !important;
+	padding: 0.5rem 1.15rem !important;
+	font-size: 0.82rem;
+	letter-spacing: 0.4px;
+	transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.navbar-modern .btn i {
+	transition: transform 0.3s ease;
+	margin-right: 4px;
+}
+
+.navbar-modern .btn:hover i {
+	transform: translateX(2px);
+}
+
+/* Ingresar: acción secundaria, contorno morado sobre blanco */
+.navbar-modern .btn.btn-info,
+.navbar-modern .btn.btn-info:focus,
+.navbar-modern .btn.btn-info:active {
+	background: #fff;
+	border: 1.5px solid rgba(111, 66, 193, 0.45) !important;
+	color: var(--nav-purple) !important;
+	box-shadow: none !important;
+}
+
+.navbar-modern .btn.btn-info:hover {
+	background: #EFEAF9;
+	border-color: var(--nav-primary) !important;
+	color: var(--nav-purple-dark) !important;
+}
+
+.navbar-modern .btn.btn-info:focus-visible {
+	outline: 2px solid var(--nav-primary);
+	outline-offset: 2px;
+}
+
+/* Agendar hora: acción principal del menú, degradado morado */
+.navbar-modern .btn.btn-purple,
+.navbar-modern .btn.btn-purple:focus,
+.navbar-modern .btn.btn-purple:active {
+	background: linear-gradient(120deg, var(--nav-primary) 0%, var(--nav-purple) 100%) border-box;
+	border: 1.5px solid transparent !important;
+	color: #ffffff !important;
+	box-shadow: none;
+}
+
+.navbar-modern .btn.btn-purple:hover {
+	background: linear-gradient(120deg, var(--nav-purple) 0%, var(--nav-purple-dark) 100%) border-box !important;
+	border-color: transparent !important;
+	color: #fff !important;
+	transform: translateY(-2px);
+	box-shadow: 0 12px 26px rgba(90, 50, 163, 0.34);
+}
+
+.navbar-modern .btn.btn-purple:focus-visible {
+	outline: 2px solid var(--nav-accent-1);
+	outline-offset: 2px;
+}
+/* ---- Toggler / menú hamburguesa animado (solo visual, CSS puro) --------- */
+.navbar-modern .navbar-toggler {
+	border: none;
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	background: rgba(111, 66, 193, 0.07);
+	transition: background 0.3s ease;
+}
+
+.navbar-modern .navbar-toggler:hover {
+	background: rgba(111, 66, 193, 0.13);
+}
+
+.navbar-modern .navbar-toggler:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.18);
+}
+
+.navbar-modern .navbar-toggler-icon {
+	position: relative;
+	display: inline-block;
+	width: 20px;
+	height: 2px;
+	background: var(--nav-text);
+	transition: background 0.25s ease 0.1s;
+}
+
+.navbar-modern .navbar-toggler-icon::before,
+.navbar-modern .navbar-toggler-icon::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 20px;
+	height: 2px;
+	background: var(--nav-text);
+	transition: transform 0.3s ease, top 0.3s ease;
+}
+
+.navbar-modern .navbar-toggler-icon::before {
+	top: -6px;
+}
+
+.navbar-modern .navbar-toggler-icon::after {
+	top: 6px;
+}
+
+.navbar-modern .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+	background: transparent;
+}
+
+.navbar-modern .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+	top: 0;
+	transform: rotate(45deg);
+	background: var(--nav-primary);
+}
+
+.navbar-modern .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+	top: 0;
+	transform: rotate(-45deg);
+	background: var(--nav-primary);
+}
+
+/* ---- Panel colapsable en mobile ------------------------------------------ */
+@media (max-width: 991.98px) {
+	.navbar-modern .navbar-collapse {
+		background: rgba(255, 255, 255, 0.97);
+		backdrop-filter: blur(10px);
+		border-radius: 16px;
+		box-shadow: 0 12px 34px rgba(42, 20, 67, 0.12);
+		margin-top: 12px;
+		padding: 14px 18px 18px;
+	}
+
+	.navbar-modern .nav-item {
+		width: 100%;
+		text-align: left;
+	}
+
+	.navbar-modern .nav-link::after {
+		left: 0;
+		transform: none;
+	}
+
+	.navbar-modern li.nav-item.mx-2 {
+		margin: 4px 0 !important;
+	}
+
+	.navbar-modern .btn {
+		width: 100%;
+		justify-content: center;
+		display: flex;
+		align-items: center;
+	}
+}
+
+/* ---- Cabecera simple: solo el logo, centrado ---------------------------
+   Se usa en las páginas legales, donde el menú completo distrae.
+   ------------------------------------------------------------------------ */
+.navbar-solo-logo {
+	justify-content: center;
+	padding-top: 0.55rem;
+	padding-bottom: 0.55rem;
+}
+
+.navbar-solo-logo .navbar-brand {
+	margin: 0;
+	padding: 0;
+}
+
+/* En anchos justos el botón principal del menú se acorta a "AGENDAR HORA" */
+@media (min-width: 992px) and (max-width: 1239.98px) {
+	.navbar-modern .nav-cta__extra {
+		display: none;
+	}
+}
+
+/* ---- Pie de página ------------------------------------------------------
+   Fondo ciruela, logo en blanco con "chile" en turquesa y enlaces legales.
+   ------------------------------------------------------------------------ */
+.vc-footer {
+	background: linear-gradient(160deg, #4A2988 0%, #6338B4 100%);
+	color: #fff;
+	font-family: 'Inter', sans-serif;
+}
+
+.vc-footer__inner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px 32px;
+	max-width: 1180px;
+	margin: 0 auto;
+	padding: 30px clamp(16px, 4vw, 40px) 22px;
+}
+
+.vc-footer__brand img,
+.vc-footer__brand:hover img {
+	display: block;
+	width: clamp(140px, 14vw, 170px);
+	height: auto;
+	transform: none;
+}
+
+.vc-footer__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 28px;
+}
+
+.vc-footer__links a {
+	padding: 4px 0;
+	color: rgba(255, 255, 255, 0.86);
+	font-size: 0.875rem;
+	font-weight: 500;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.vc-footer__links a:hover,
+.vc-footer__links a:focus-visible {
+	color: #fff;
+	border-bottom-color: var(--nav-accent-1);
+	text-decoration: none;
+}
+
+.vc-footer__brand:focus-visible,
+.vc-footer__links a:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.7) !important;
+	outline-offset: 4px;
+}
+
+.vc-footer__legal {
+	margin: 0;
+	padding: 16px clamp(16px, 4vw, 40px) 22px;
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+	text-align: center;
+	font-size: 0.82rem;
+	line-height: 1.5;
+	color: rgba(255, 255, 255, 0.92);
+}
+
+.vc-footer__legal span {
+	display: inline-block;
+	white-space: nowrap;
+	padding: 0 0.5em;
+}
+
+@media (max-width: 575.98px) {
+	.vc-footer__inner {
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.vc-footer__links {
+		justify-content: center;
+	}
+
+	/* Deja libre la esquina que ocupa el botón flotante de WhatsApp */
+	.vc-footer__legal {
+		padding-bottom: 84px;
+	}
+}
+
+/* El botón es flex con gap: se compensa para que "HORA VETERINARIA" se lea seguido */
+.navbar-modern .nav-cta__extra {
+	margin-left: -3px;
+}
+
+/* ---- Versión clara: pie blanco y barra superior en un solo tono -------- */
+.sdi-topbar {
+	background: var(--nav-purple);
+}
+
+.vc-footer {
+	background: #FFFFFF;
+	border-top: 1px solid #EAE6F3;
+	color: var(--nav-text);
+}
+
+.vc-footer__links a {
+	color: #5A5470;
+}
+
+.vc-footer__links a:hover,
+.vc-footer__links a:focus-visible {
+	color: var(--nav-purple);
+}
+
+.vc-footer__brand:focus-visible,
+.vc-footer__links a:focus-visible {
+	outline-color: var(--nav-primary) !important;
+}
+
+.vc-footer__legal {
+	border-top-color: #EAE6F3;
+	color: #5A5470;
+}

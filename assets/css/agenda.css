@@ -1,0 +1,517 @@
+/* ==========================================================================
+   agenda.css — Asistente "Agendar hora veterinaria" (agendamiento.php)
+   Complementa los estilos base del asistente que viven al final de main.css
+   (pasos, paneles, tarjetas y botones) con las piezas propias de VeterChile.
+   Colores: tokens --brand-* (morado) y --accent (turquesa #31BEBE) de main.css.
+   ========================================================================== */
+
+body.ag {
+	background:
+		radial-gradient(1100px 520px at 100% -8%, rgba(111, 66, 193, .06), transparent 60%),
+		radial-gradient(900px 500px at -10% 0%, rgba(49, 190, 190, .07), transparent 55%),
+		var(--bg);
+}
+
+/* La cabecera es fija (barra superior + menú): el contenido parte más abajo */
+.shell.ag-page {
+	padding-top: clamp(148px, 12vw, 176px);
+	min-height: 78vh;
+}
+
+/* ---- Encabezado --------------------------------------------------------- */
+.ag-page .hero-line {
+	max-width: 680px;
+}
+
+.ag-page .hero-line h1 {
+	font-size: clamp(1.6rem, 1.2rem + 1.7vw, 2.25rem);
+	line-height: 1.15;
+	letter-spacing: -.02em;
+	margin-bottom: 10px;
+}
+
+.ag-page .hero-line p {
+	font-size: clamp(.95rem, .9rem + .2vw, 1.05rem);
+	line-height: 1.6;
+}
+
+.ag-kicker {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 14px;
+	padding: 6px 13px;
+	border-radius: 999px;
+	background: var(--brand-100);
+	color: var(--brand-700);
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+}
+
+.ag-kicker::before {
+	content: "";
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--accent);
+}
+
+/* ---- Paneles ------------------------------------------------------------ */
+.ag .panel h2 {
+	font-size: clamp(1.2rem, 1.05rem + .6vw, 1.45rem);
+	line-height: 1.25;
+}
+
+.ag .panel .sub {
+	font-size: 14.5px;
+	max-width: 620px;
+}
+
+.ag .panel-title .eyebrow {
+	color: var(--brand-600);
+}
+
+.ag .field label small,
+.ag-label small {
+	font-weight: 500;
+	color: var(--ink-soft);
+}
+
+.ag .field textarea {
+	width: 100%;
+	padding: 12px 14px;
+	border-radius: var(--radius-sm);
+	border: 1.5px solid var(--line);
+	font-size: 14.5px;
+	font-family: 'Inter', sans-serif;
+	color: var(--ink);
+	background: #fff;
+	resize: vertical;
+	transition: border-color .15s, box-shadow .15s;
+}
+
+.ag .field textarea:focus {
+	border-color: var(--brand-500);
+	box-shadow: 0 0 0 4px var(--brand-100);
+}
+
+.ag .field select:disabled {
+	background: var(--bg);
+	color: var(--ink-faint);
+	cursor: not-allowed;
+}
+
+.ag .field.has-error select {
+	border-color: var(--danger);
+}
+
+/* Botones: el morado de marca reemplaza al azul que trae Bootstrap */
+.ag .btn-primary,
+.ag .btn-primary:hover,
+.ag .btn-primary:focus,
+.ag .btn-primary:active,
+.ag .btn-primary:disabled {
+	background-color: var(--brand-600);
+	border-color: transparent;
+	color: #fff;
+}
+
+.ag .btn-ghost,
+.ag .btn-ghost:hover {
+	color: var(--brand-700);
+	text-decoration: none;
+}
+
+.ag .btn-sm {
+	min-height: 40px;
+	white-space: nowrap;
+}
+
+/* main.css quita todos los contornos de foco: aquí se devuelven para teclado */
+.ag-page :focus-visible {
+	outline: 3px solid var(--brand-500) !important;
+	outline-offset: 2px;
+}
+
+.ag-page h2:focus-visible {
+	outline: none !important;
+}
+
+/* ---- Paso 1: tipo de atención ------------------------------------------- */
+.ag .ag-areas {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.ag .tipo-card {
+	display: block;
+	width: 100%;
+	font-family: inherit;
+}
+
+.ag .tipo-card b {
+	font-size: 14.5px;
+}
+
+.ag-servicios {
+	margin-top: 24px;
+	padding-top: 20px;
+	border-top: 1px dashed var(--line);
+}
+
+.ag-label {
+	margin: 0 0 10px;
+	font-family: 'Inter', sans-serif;
+	font-size: 12.5px;
+	font-weight: 700;
+	color: var(--brand-900);
+}
+
+.ag-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.ag-chip {
+	min-height: 40px;
+	padding: 8px 15px;
+	border-radius: 999px;
+	border: 1.5px solid var(--line);
+	background: #fff;
+	color: var(--ink);
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: border-color .15s, background .15s, color .15s;
+}
+
+.ag-chip:hover {
+	border-color: var(--brand-500);
+}
+
+.ag-chip[aria-pressed="true"] {
+	background: var(--brand-600);
+	border-color: var(--brand-600);
+	color: #fff;
+}
+
+/* ---- Paso 3: resultados ------------------------------------------------- */
+.ag .results-meta {
+	font-size: 13.5px;
+}
+
+.ag-foto {
+	width: 52px;
+	height: 52px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	object-fit: cover;
+	background: var(--brand-100);
+}
+
+.ag .avatar {
+	background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+}
+
+.ag .prof-info .pspec {
+	margin-bottom: 0;
+	font-size: 13px;
+}
+
+.ag-lugares {
+	display: grid;
+	gap: 10px;
+	margin-top: 14px;
+	padding-top: 14px;
+	border-top: 1px dashed var(--line);
+}
+
+.ag-lugar {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 12px 14px;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-sm);
+	background: var(--bg);
+}
+
+.ag-lugar__info {
+	flex: 1;
+	min-width: 0;
+}
+
+.ag-lugar__nombre {
+	margin: 0 0 2px;
+	font-size: 13.5px;
+	font-weight: 700;
+	line-height: 1.35;
+	color: var(--ink);
+}
+
+.ag-lugar__dir {
+	display: flex;
+	align-items: flex-start;
+	gap: 6px;
+	margin: 0;
+	font-size: 12.5px;
+	line-height: 1.45;
+	color: var(--ink-soft);
+}
+
+.ag-lugar__dir svg {
+	flex-shrink: 0;
+	margin-top: 1px;
+	color: var(--accent-700);
+}
+
+.ag-sin-agenda {
+	margin: 0;
+	font-size: 12.5px;
+	font-style: italic;
+	color: var(--ink-soft);
+}
+
+/* ---- Paso 4: día y hora ------------------------------------------------- */
+.ag-resumen {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 22px;
+	padding: 14px 16px;
+	border: 1px solid var(--brand-300);
+	border-radius: var(--radius-md);
+	background: var(--brand-100);
+}
+
+.ag-resumen__info {
+	flex: 1;
+	min-width: 0;
+}
+
+.ag-resumen__nombre {
+	margin: 0 0 2px;
+	font-family: 'Manrope', sans-serif;
+	font-size: 14.5px;
+	font-weight: 800;
+	line-height: 1.3;
+	color: var(--brand-900);
+}
+
+.ag-resumen__lugar {
+	margin: 0;
+	font-size: 12.5px;
+	line-height: 1.45;
+	color: var(--ink-soft);
+}
+
+.ag .day-pill {
+	font-family: inherit;
+}
+
+.ag .day-pill .dmes {
+	display: block;
+	margin-top: 1px;
+	font-size: 10.5px;
+	font-weight: 600;
+	color: var(--ink-faint);
+	text-transform: lowercase;
+}
+
+.ag .day-pill.selected .dmes {
+	color: rgba(255, 255, 255, .85);
+}
+
+.ag .slot-grid {
+	gap: 8px;
+}
+
+.ag .slot-btn {
+	min-width: 68px;
+	min-height: 40px;
+	font-size: 13px;
+}
+
+.ag .slot-btn[aria-pressed="true"] {
+	background: var(--brand-600);
+	border-color: var(--brand-600);
+	color: #fff;
+}
+
+/* ---- Paso 5: tutor y mascota -------------------------------------------- */
+.ag-dos {
+	display: grid;
+	gap: 26px;
+	grid-template-columns: 1fr;
+}
+
+.ag-grupo {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 4px 0 14px;
+	font-family: 'Manrope', sans-serif;
+	font-size: 14.5px;
+	font-weight: 800;
+	color: var(--brand-900);
+}
+
+.ag-grupo::before {
+	content: "";
+	width: 4px;
+	height: 16px;
+	border-radius: 4px;
+	background: var(--accent);
+}
+
+.ag-nota {
+	margin: 12px 0 0;
+	font-size: 12.5px;
+	line-height: 1.5;
+	color: var(--ink-soft);
+}
+
+.ag-nota a {
+	color: var(--brand-700);
+	font-size: inherit;
+	font-weight: 700;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.ag-exito-acciones {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+}
+
+/* ---- Estados: carga, vacío y error -------------------------------------- */
+.ag-cargando {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	grid-column: 1 / -1;
+	padding: 34px 16px;
+	font-size: 13.5px;
+	color: var(--ink-soft);
+}
+
+.ag-cargando::before {
+	content: "";
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 2.5px solid var(--brand-100);
+	border-top-color: var(--brand-500);
+	animation: ag-giro .8s linear infinite;
+}
+
+@keyframes ag-giro {
+	to { transform: rotate(360deg); }
+}
+
+.ag-alerta {
+	margin-bottom: 20px;
+	padding: 14px 16px;
+	border: 1px solid rgba(190, 60, 60, .28);
+	border-radius: var(--radius-sm);
+	background: #FDECEC;
+	color: #9E2A2A;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.ag-alerta a {
+	color: inherit;
+	font-size: inherit;
+	font-weight: 700;
+	text-decoration: underline;
+}
+
+.ag-alerta[hidden],
+.ag-servicios[hidden] {
+	display: none;
+}
+
+.ag .empty-state p {
+	font-size: 13.5px;
+}
+
+/* ---- Responsive --------------------------------------------------------- */
+@media (min-width: 900px) {
+	.ag-dos {
+		grid-template-columns: 1.3fr .9fr;
+		align-items: start;
+	}
+
+	.ag-lateral {
+		position: sticky;
+		top: 140px;
+	}
+}
+
+@media (max-width: 760px) {
+	.ag .ag-areas {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/* En pantallas chicas solo se nombra el paso actual */
+	.ag .stepper .step-label {
+		display: none;
+	}
+
+	.ag .stepper .step-item.active .step-label {
+		display: block;
+	}
+
+	.ag .step-connector {
+		width: 16px;
+		margin: 0 6px;
+	}
+}
+
+@media (max-width: 560px) {
+	.ag-lugar,
+	.ag-resumen {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.ag-lugar .btn,
+	.ag-resumen .btn {
+		width: 100%;
+	}
+
+	.ag .actions-row {
+		flex-direction: column-reverse;
+		align-items: stretch;
+	}
+
+	.ag .actions-row .btn {
+		width: 100%;
+	}
+
+	.ag .actions-row > span:empty {
+		display: none;
+	}
+}
+
+@media (max-width: 400px) {
+	.ag .ag-areas {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ag .panel.active {
+		animation: none;
+	}
+
+	.ag-cargando::before {
+		animation-duration: 2s;
+	}
+}
