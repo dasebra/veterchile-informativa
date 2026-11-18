@@ -20,7 +20,7 @@
 	 *   'ejemplo' → datos ficticios de assets/js/buscador-reserva-datos.js (sirve para revisar el diseño).
 	 *   'api'     → la API de VeterChile ($agenda_api). Ver NOTA_PROGRAMADOR_BUSCADOR.md.
 	 */
-	$buscador_modo = 'ejemplo';
+	$buscador_modo = 'api';
 	?>
 
 
